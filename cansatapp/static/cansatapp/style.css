@@ -1,0 +1,257 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.alert{
+    position: relative;
+    z-index: 1;
+    background-color: red;
+}
+
+.content
+{
+    background-image: url(./image/BGI_base.png);
+    height: 860px;
+}
+
+.top_section
+{
+    
+    height: 90px;
+    padding: 5px;
+    background-image:url(./image/BGI_1.png);
+}
+.top_section img
+{
+    max-width: 60px;
+    max-height: 60px;
+    position: relative;
+    left: 50px;
+}
+.team_name
+{
+    display: inline;
+    position: relative;
+    bottom: 20px;
+    left: 50px;
+    border-radius: 20px;
+    padding: 2px 5px;
+    color: rgb(158, 239, 239);
+    background: blue;
+}
+.title
+{
+    display: inline;
+    position: relative;
+    font-family: Georgia, serif;
+    left: 359px;
+    font-size: 80px;
+    color: rgba(252, 251, 253, 0.968);
+}
+
+.main_body
+{
+    position: relative;
+    top: 10px;
+    max-width: 100%;
+    height: 740px;
+    border-radius: 5px;
+    border: 5px solid black;
+}
+.plots
+{
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    width: 1125px;
+    height: 715px;
+    border-radius: 10px;
+    border: 2px solid lightcoral;
+    background-image: url(./image/BGI_2.png);
+}
+.H1
+{
+    display: inline; 
+    padding: 5px;
+    position: absolute;   
+    left: 45%;
+    top: 3px;
+    border-radius: 30px;
+    border: 1px solid red;
+}
+.H1 h1
+{
+    display: inline;
+}
+.P1
+{
+    display: inline;
+    position: absolute;
+    top: 9%;
+    left: 159px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.tag
+{
+    display: inline;
+    position: absolute;
+    top: 100%;
+    left: 35%;
+    color: antiquewhite;
+}
+.tag1
+{
+    display: inline;
+    position: absolute;
+    top: 100%;
+    left: 35%;
+    color: antiquewhite;
+}
+
+.P2
+{
+    display: inline;
+    position: absolute;
+    top: 9%;
+    left: 610px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.P3
+{
+    display: inline;
+    position: absolute;
+    top: 55%;
+    left: 391px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.P4
+{
+    display: inline;
+    position: absolute;
+    top: 55%;
+    left: 40px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.P5
+{
+    display: inline;
+    position: absolute;
+    top: 55%;
+    left: 420px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.P6
+{
+    display: inline;
+    position: absolute;
+    top: 55%;
+    left: 800px;
+    width: 360px;
+    height: 300px;
+    border: 2px solid black;
+}
+.data
+{
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 1156px;
+    width: 200px;
+    height: 228px;
+    border-radius: 10px;
+    border: 2px solid lightcoral;
+    background-image: url(./image/BGI_2.png);
+}
+.H2
+{
+    display: inline; 
+    padding: 5px;
+    position: absolute;   
+    left: 30%;
+    top: 5px;
+    border-radius: 30px;
+    border: 1px solid red;
+}
+.H2 h1
+{
+    display: inline;
+}
+.status
+{
+    display: inline-block;
+    position: absolute;
+    top: 475px;
+    left: 1238px;
+    width: 245px;
+    height: 255px;
+    border-radius: 10px;
+    border: 2px solid lightcoral;
+    background-image: url(./image/BGI_3.png);
+}
+.H3
+{
+    display: inline; 
+    padding: 5px;
+    position: absolute;   
+    left: 25%;
+    top: 5px;
+    border-radius: 30px;
+    border: 1px solid red;
+}
+.H3 h1
+{
+    display: inline;
+}
+
+.resize_p1 {
+    width: 360px;
+    height: 300px;
+}
+
+.resize_p2 {
+    width: 360px;
+    height: 300px;
+}
+
+.resize_p3 {
+    width: 360px;
+    height: 300px;
+}
+
+.resize_p4 {
+    width: 360px;
+    height: 300px;
+}
+
+.resize_p5 {
+    width: 360px;
+    height: 300px;
+}
+
+.resize_p6 {
+    width: 360px;
+    height: 300px;
+}
+
+.FL_MODE
+{
+    margin-left: 8px;
+    border: 1px solid grey;
+}
+.SM_MODE
+{
+    margin-left: 5px;
+    border: 1px solid grey;
+}

@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Innovation Lab</title>
+    <link rel="stylesheet" href="{% static 'cansatapp/style.css' %}">
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 0, 0.5); 
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        .message-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 358px
+        }
+
+        
+        .ok-button {
+            background-color: #0074cc; 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="content" class="content">
+        <div id="top_section" class="top_section">
+            <!-- <img src="{% static 'cansatapp/image/logo.png' %}"> -->
+            <h2 id="team_name" class="team_name">Innovation Lab</h2>
+            <h1 id="title" class="title" style="left: 359px;">Gas Data</h1>
+        </div>
+        <div id="main_body" class="main_body">
+            <div id="plots" class="plots" style ="color:white">
+                <div id="H1" class="H1">
+                    <h1>PLOTS</h1>
+                </div>
+                <div id="P1" class="P1">
+                    <img class="resize_p1" src="data:image/png;base64,{{ plot_co }}">
+                    <span id="tag" class="tag" style="color: antiquewhite; font-size: large; left: 24%;">CO</span>
+                    <span id="tag" class="tag1" style="color: antiquewhite; font-size:medium; ">(Avg of last 2 sec : {{avgco}})</span>
+                </div>
+                <div id="P2" class="P2">
+                    <img class="resize_p2" src="data:image/png;base64,{{ plot_nox }}">
+                    <span id="tag" class="tag" style="color: antiquewhite; font-size: large; left: 22%;">NOx</span>
+                    <span id="tag" class="tag1" style="color: antiquewhite; font-size: medium;">(Avg of last 2 sec : {{avgnox}})</span>
+                </div>
+                <div id="P3" class="P3">
+                    <img class="resize_p3" src="data:image/png;base64,{{ plot_pm }}">
+                    <span id="tag" class="tag" style="color: antiquewhite; font-size: large; left: 11%;">Particulate Matter</span>
+                    <span id="tag" class="tag1" style="color: antiquewhite; font-size: medium; left: 50%;">(Avg of last 2 sec : {{avgpm}})</span>
+                </div>
+            </div>
+            <div id="data" class="data" style="width: 283px; height: 310px;color:white">
+                <div id="H2" class="H2">
+                    <h1>DATA</h1>
+                </div>
+                <br><br><br><br>
+                <span>&nbsp CO Concentration : {{co}}</span><br><br>
+                <span>&nbsp NOx Concentration : {{nox}}</span><br><br>
+                <span>&nbsp PM Concentration: {{pm}}</span><br><br>
+                <span>&nbsp Threshold Value for CO: {{tco}}</span><br><br>
+                <span>&nbsp Threshold Value for NOx: {{tnox}}</span><br><br>
+                <span>&nbsp Threshold Value for PM: {{tpm}}</span><br><br>
+            </div>
+        </div>
+    </div>
+    
+    <div class="overlay" id="alertOverlay">
+        <div class="message-box">
+            <h2>Warning</h2>
+            <p>Gas Name above Threshold: <span id="gasName"></span></p>
+            <p>Gas current Conc: <span id="gasConc"></span></p>
+            <p>Gas Threshold Conc: <span id="gasThreshold"></span></p>
+            <button class="ok-button" id="okButton">OK</button>
+        </div>
+    </div>
+    <script src="{% static 'cansatapp/index.js' %}"> </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if any of the conditions are met
+            const co = {{ co }};
+            const tco = {{ tco }};
+            const nox = {{ nox }};
+            const tnox = {{ tnox }};
+            const pm = {{ pm }};
+            const tpm = {{ tpm }};
+
+            if ({{co}} >= {{tco}} || {{nox}} >= {{tnox}} || {{pm}} >= {{tpm}}) {
+                setTimeout(function() {
+                    var alertOverlay = document.getElementById('alertOverlay');
+                    alertOverlay.style.display = 'flex';
+
+                    if ({{co}} >= {{tco}} && {{nox}} >= {{tnox}} && {{pm}} >= {{tpm}}){
+                        document.getElementById('gasName').textContent = 'CO, NOx, Particulate Matter'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = "CO = {{co}}, NOx = {{nox}}, PM = {{pm}}"; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = "CO = {{tco}}, NOx = {{tnox}}, PM = {{tpm}}"; // or {{tnox}} or {{tpm}}
+                    }
+                    else if ({{co}} >= {{tco}} && {{nox}} >= {{tnox}} ){
+                        document.getElementById('gasName').textContent = 'CO, NOx'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = "CO = {{co}}, NOx = {{nox}}"; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = "CO = {{tco}}, NOx = {{tnox}}"; // or {{tnox}} or {{tpm}}                        
+                    }
+                    else if ({{pm}} >= {{tpm}} && {{nox}} >= {{tnox}}){
+                        document.getElementById('gasName').textContent = 'NOx, Particulate Matter'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = "NOx = {{nox}},PM = {{pm}}"; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = "NOx = {{tnox}}, PM = {{tpm}}"; // or {{tnox}} or {{tpm}}                        
+                    }
+                    else if ({{pm}} >= {{tpm}} && {{co}} >= {{tco}} ){
+                        document.getElementById('gasName').textContent = 'CO, Particulate Matter'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = "CO = {{co}}, PM = {{pm}}"; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = 'CO = {{tco}}, PM = {{tpm}}'; // or {{tnox}} or {{tpm}}                        
+                    }
+                    else if ({{co}} >= {{tco}} ){
+                        document.getElementById('gasName').textContent = 'CO'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = '{{co}}'; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = '{{tco}}'; // or {{tnox}} or {{tpm}}                        
+                    }
+                    else if ({{nox}} >= {{tnox}} ){
+                        document.getElementById('gasName').textContent = 'NOx'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = '{{nox}}'; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = '{{tnox}}'; // or {{tnox}} or {{tpm}}                        
+                    }
+                    else {
+                        document.getElementById('gasName').textContent = 'Particulate Matter'; // or 'NOx' or 'PM'
+                        document.getElementById('gasConc').textContent = '{{pm}}'; // or {{nox}} or {{pm}}
+                        document.getElementById('gasThreshold').textContent = '{{tpm}}'; // or {{tnox}} or {{tpm}}                        
+                    }
+                }, 3000);
+        
+            var okButton = document.getElementById('okButton');
+            okButton.addEventListener('click', function() {
+                var alertOverlay = document.getElementById('alertOverlay');
+                alertOverlay.style.display = 'none';
+            });
+        }
+        });
+        
+    </script>
+</body>
+</html>
